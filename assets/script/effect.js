@@ -21,11 +21,274 @@ const gradientSize = 100;
 const smoothing = 0.15;
 const overlayOpacity = 0.85;
 
+let lumieresData = [];
+let lumieresDataValide = [];
+let hoveredHaloIndex = null; // -1 ou null = rien en hover
+
+
+// loead le fichier json des lumieres
+async function loadLumieres() {
+    try {
+        const response = await fetch('../assets/data/lumieres.json');
+        const data = await response.json();
+        lumieresData = data.type;
+    } catch (e) {
+        console.error("Erreur lors du chargement du fichier lumieres.json", e);
+    }
+}
+
+// function drawLightHalos() {
+//     const scaleX = ctx.canvas.width / 1920;
+//     const scaleY = ctx.canvas.height / 1080;
+
+//     for (const halo of lumieresData) {
+//         const coX = halo.coX * scaleX;
+//         const coY = halo.coY * scaleY;
+//         const radiusX = halo.radiusX * scaleX;
+//         const radiusY = halo.radiusY * scaleY;
+
+//         const gradient = ctx.createRadialGradient(
+//             coX, coY, 0,
+//             coX, coY, Math.max(radiusX, radiusY)
+//         );
+//         gradient.addColorStop(0, halo.colordebut);
+//         gradient.addColorStop(1, halo.colorfin);
+
+//         ctx.fillStyle = gradient;
+//         ctx.beginPath();
+//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+//         ctx.fill();
+//     }
+// }
+
+
+// function drawLightHalos() {
+//     const scaleX = ctx.canvas.width / 1920;
+//     const scaleY = ctx.canvas.height / 1080;
+
+//     // Spotlight "ellipse" calculée comme dans drawSpotlight
+//     const distX = Math.abs(mouseX - canvas.width / 2);
+//     const distY = Math.abs(mouseY - canvas.height / 2);
+//     const spotlightWidth = spotlightRadius + distX * 0.05;
+//     const spotlightHeight = spotlightRadius + distY * 0.05;
+
+//     for (const halo of lumieresData) {
+//         const coX = halo.coX * scaleX;
+//         const coY = halo.coY * scaleY;
+//         const radiusX = halo.radiusX * scaleX;
+//         const radiusY = halo.radiusY * scaleY;
+
+//         // Vérifier si le halo est dans l'ellipse du spotlight (collision ellipse)
+//         const dx = coX - mouseX;
+//         const dy = coY - mouseY;
+
+//         const inSpotlight = (dx * dx) / ((spotlightWidth + gradientSize) ** 2) + (dy * dy) / ((spotlightHeight + gradientSize) ** 2) <= 1;
+
+//         const gradient = ctx.createRadialGradient(
+//             coX, coY, 0,
+//             coX, coY, Math.max(radiusX, radiusY)
+//         );
+
+//         gradient.addColorStop(0, inSpotlight ? halo.colorfin : halo.colordebut);
+//         gradient.addColorStop(1, inSpotlight ? halo.colorfin : halo.colorfin);
+
+//         ctx.fillStyle = gradient;
+//         ctx.beginPath();
+//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+//         ctx.fill();
+//     }
+// }
+
+
+// function drawLightHalos() {
+//     const scaleX = ctx.canvas.width / 1920;
+//     const scaleY = ctx.canvas.height / 1080;
+
+//     const distX = Math.abs(mouseX - canvas.width / 2);
+//     const distY = Math.abs(mouseY - canvas.height / 2);
+//     const spotlightWidth = spotlightRadius + distX * 0.05;
+//     const spotlightHeight = spotlightRadius + distY * 0.05;
+
+//     // 1. DESSINER TOUS CEUX DÉJÀ VALIDÉS
+//     for (const halo of lumieresDataValide) {
+//         const coX = halo.coX * scaleX;
+//         const coY = halo.coY * scaleY;
+//         const radiusX = halo.radiusX * scaleX;
+//         const radiusY = halo.radiusY * scaleY;
+
+//         const gradient = ctx.createRadialGradient(
+//             coX, coY, 0,
+//             coX, coY, Math.max(radiusX, radiusY)
+//         );
+//         gradient.addColorStop(0, halo.colorfin);
+//         gradient.addColorStop(1, halo.colorfin);
+
+//         ctx.fillStyle = gradient;
+//         ctx.beginPath();
+//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+//         ctx.fill();
+//     }
+
+//     // 2. DESSINER CEUX NON VALIDÉS, ET TESTER SI ILS PASSENT EN VALIDÉ
+//     // On doit utiliser une copie pour éviter de modifier un tableau pendant qu’on le parcourt
+//     for (let i = lumieresData.length - 1; i >= 0; i--) {
+//         const halo = lumieresData[i];
+
+//         const coX = halo.coX * scaleX;
+//         const coY = halo.coY * scaleY;
+//         const radiusX = halo.radiusX * scaleX;
+//         const radiusY = halo.radiusY * scaleY;
+
+//         const dx = coX - mouseX;
+//         const dy = coY - mouseY;
+//         const inSpotlight = (dx * dx) / ((spotlightWidth + gradientSize) ** 2) +
+//                             (dy * dy) / ((spotlightHeight + gradientSize) ** 2) <= 1;
+
+//         if (inSpotlight) {
+//             // Déplacer vers les validés
+//             lumieresDataValide.push(halo);
+//             lumieresData.splice(i, 1);
+//             continue; // Ne le dessine plus ici
+//         }
+
+//         // Dessin normal en colordebut
+//         const gradient = ctx.createRadialGradient(
+//             coX, coY, 0,
+//             coX, coY, Math.max(radiusX, radiusY)
+//         );
+//         gradient.addColorStop(0, halo.colordebut);
+//         gradient.addColorStop(1, halo.colorfin);
+
+//         ctx.fillStyle = gradient;
+//         ctx.beginPath();
+//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+//         ctx.fill();
+//     }
+// }
+
+
+function drawLightHalos() {
+    const scaleX = ctx.canvas.width / 1920;
+    const scaleY = ctx.canvas.height / 1080;
+
+    const distX = Math.abs(mouseX - canvas.width / 2);
+    const distY = Math.abs(mouseY - canvas.height / 2);
+    const spotlightWidth = spotlightRadius + distX * 0.05;
+    const spotlightHeight = spotlightRadius + distY * 0.05;
+
+    hoveredHaloIndex = null;
+
+    // DESSINER LES HALOS VALIDÉS
+    for (const halo of lumieresDataValide) {
+        const coX = halo.coX * scaleX;
+        const coY = halo.coY * scaleY;
+        const radiusX = halo.radiusX * scaleX;
+        const radiusY = halo.radiusY * scaleY;
+
+        const gradient = ctx.createRadialGradient(
+            coX, coY, 0,
+            coX, coY, Math.max(radiusX, radiusY)
+        );
+        gradient.addColorStop(0, halo.colorfin);
+        gradient.addColorStop(1, halo.colorfin);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // DESSINER LES HALOS NON VALIDÉS
+    for (let i = 0; i < lumieresData.length; i++) {
+        const halo = lumieresData[i];
+        const coX = halo.coX * scaleX;
+        const coY = halo.coY * scaleY;
+        const radiusX = halo.radiusX * scaleX;
+        const radiusY = halo.radiusY * scaleY;
+
+        const dx = coX - mouseX;
+        const dy = coY - mouseY;
+        const inSpotlight = (dx * dx) / ((spotlightWidth + gradientSize) ** 2) +
+                            (dy * dy) / ((spotlightHeight + gradientSize) ** 2) <= 1;
+
+        let color = halo.colordebut;
+        if (inSpotlight) {
+            color = halo.colorHover;
+            hoveredHaloIndex = i; // stocker l'index pour le clic
+        }
+
+        const gradient = ctx.createRadialGradient(
+            coX, coY, 0,
+            coX, coY, Math.max(radiusX, radiusY)
+        );
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, halo.colorfin);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+const LOGICAL_WIDTH = 1920;
+const LOGICAL_HEIGHT = 1080;
+
+
+
 // Redimensionner le canvas
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const aspectRatio = 16 / 9;
+
+    let canvasWidth, canvasHeight;
+
+    if (windowWidth / windowHeight > aspectRatio) {
+        // Trop large : hauteur fait foi
+        canvasHeight = windowHeight;
+        canvasWidth = canvasHeight * aspectRatio;
+    } else {
+        // Trop haut : largeur fait foi
+        canvasWidth = windowWidth;
+        canvasHeight = canvasWidth / aspectRatio;
+    }
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    // Centrer le canvas avec du CSS
+    canvas.style.position = 'absolute';
+    canvas.style.left = `${(windowWidth - canvasWidth) / 2}px`;
+    canvas.style.top = `${(windowHeight - canvasHeight) / 2}px`;
+    canvas.style.backgroundColor = 'black'; // pour combler les bords
+
+    // (Optionnel) mettre un fond noir derrière
+    document.body.style.backgroundColor = 'black';
+
+    // const windowWidth = window.innerWidth;
+    // const windowHeight = window.innerHeight;
+    // const scaleX = windowWidth / LOGICAL_WIDTH;
+    // const scaleY = windowHeight / LOGICAL_HEIGHT;
+    // const scale = Math.min(scaleX, scaleY);
+
+    // const displayWidth = LOGICAL_WIDTH * scale;
+    // const displayHeight = LOGICAL_HEIGHT * scale;
+
+    // // Redimensionne le style (affichage) mais pas la résolution logique
+    // canvas.style.width = `${displayWidth}px`;
+    // canvas.style.height = `${displayHeight}px`;
+
+    // // Centre le canvas dans la fenêtre
+    // canvas.style.position = 'absolute';
+    // canvas.style.left = `${(windowWidth - displayWidth) / 2}px`;
+    // canvas.style.top = `${(windowHeight - displayHeight) / 2}px`;
+
+    // document.body.style.backgroundColor = 'black';
+
+    // // Prépare le contexte avec le bon scale pour le dessin
+    // ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+
     // Position de la lampe torche (75% de la largeur, en bas)
     flashlightX = canvas.width * 0.80;
     flashlightY = canvas.height - 20;
@@ -41,19 +304,22 @@ function resizeCanvas() {
 function loadImage() {
     image = new Image();
     image.crossOrigin = 'anonymous';
-    image.onload = function() {
+    image.onload = async function() {
         imageLoaded = true;
         loading.style.display = 'none';
         mouseX = targetX = canvas.width / 2;
         mouseY = targetY = canvas.height / 2;
-        animate();
+        await loadLumieres();  // 👈 Charge le JSON avant d'animer
+        animate();   
     };
-    image.onerror = function() {
+    image.onerror = async function() {
         loading.textContent = 'Erreur de chargement - utilisation d\'un dégradé';
         imageLoaded = true;
         mouseX = targetX = canvas.width / 2;
         mouseY = targetY = canvas.height / 2;
-        animate();
+
+        await loadLumieres();  // 👈 Même chose ici
+        animate();    
     };
     // Votre image locale
     image.src = '../assets/img/chris.png';
@@ -94,104 +360,6 @@ function drawBackground() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 }
-
-// // Créer l'effet spotlight
-// function drawSpotlight() {
-//     // Lissage du mouvement de la souris
-//     mouseX += (targetX - mouseX) * smoothing;
-//     mouseY += (targetY - mouseY) * smoothing;
-
-//     // Créer un masque pour l'overlay sombre
-//     const overlayCanvas = document.createElement('canvas');
-//     overlayCanvas.width = canvas.width;
-//     overlayCanvas.height = canvas.height;
-//     const overlayCtx = overlayCanvas.getContext('2d');
-
-//     // Remplir avec la couleur sombre
-//     overlayCtx.fillStyle = `rgba(0, 0, 0, ${overlayOpacity})`;
-//     overlayCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-//     // Créer le trou avec dégradé
-//     const gradient = overlayCtx.createRadialGradient(
-//         mouseX, mouseY, 0,
-//         mouseX, mouseY, spotlightRadius + gradientSize
-//     );
-//     gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');  // Jaune pâle, opaque
-//     gradient.addColorStop(0.2, 'rgba(248, 241, 226, 0.15)');   // Jaune un peu plus intense
-//     gradient.addColorStop(0.4, 'rgba(247, 208, 115, 0.3)');   // Jaune un peu plus intense
-//     gradient.addColorStop(0.6, 'rgba(247, 208, 115, 0.6)');   // Jaune un peu plus intense
-//     gradient.addColorStop(0.7, 'rgba(249, 189, 133, 0.3)');   // Orange doux, plus transparent
-//     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');           // Transparency towards the edges
-
-//     overlayCtx.globalCompositeOperation = 'destination-out';
-//     overlayCtx.beginPath();
-//     overlayCtx.arc(mouseX, mouseY, spotlightRadius, 0, Math.PI * 2);
-//     overlayCtx.fill();
-
-//     // Ajouter le dégradé
-//     overlayCtx.globalCompositeOperation = 'source-over';
-//     overlayCtx.fillStyle = gradient;
-//     overlayCtx.beginPath();
-//     overlayCtx.arc(mouseX, mouseY, spotlightRadius + gradientSize, 0, Math.PI * 2);
-//     overlayCtx.fill();
-
-//     // Appliquer l'overlay sur le canvas principal
-//     ctx.drawImage(overlayCanvas, 0, 0);
-// }
-// Créer l'effet spotlight avec distorsion de l'ellipse
-// function drawSpotlight() {
-//     // Lissage du mouvement de la souris
-//     mouseX += (targetX - mouseX) * smoothing;
-//     mouseY += (targetY - mouseY) * smoothing;
-
-//     // Créer un masque pour l'overlay sombre
-//     const overlayCanvas = document.createElement('canvas');
-//     overlayCanvas.width = canvas.width;
-//     overlayCanvas.height = canvas.height;
-//     const overlayCtx = overlayCanvas.getContext('2d');
-
-//     // Remplir avec la couleur sombre
-//     overlayCtx.fillStyle = `rgba(0, 0, 0, ${overlayOpacity})`;
-//     overlayCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-//     // Créer le trou avec dégradé
-//     const gradient = overlayCtx.createRadialGradient(
-//         mouseX, mouseY, 0,
-//         mouseX, mouseY, spotlightRadius + gradientSize
-//     );
-    
-//     // Dégradé avec différentes étapes de lumière
-//     gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');  // Jaune pâle
-//     gradient.addColorStop(0.2, 'rgba(248, 241, 226, 0.15)');   // Jaune plus intense
-//     gradient.addColorStop(0.4, 'rgba(247, 208, 115, 0.3)');   // Jaune encore plus intense
-//     gradient.addColorStop(0.6, 'rgba(247, 208, 115, 0.6)');   // Jaune très lumineux
-//     gradient.addColorStop(0.7, 'rgba(249, 189, 133, 0.3)');   // Orange doux, plus transparent
-//     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');           // Transparency vers les bords
-
-//     // Appliquer un effet d'ellipse (ovale) plutôt qu'un cercle
-//     overlayCtx.globalCompositeOperation = 'destination-out';
-//     overlayCtx.beginPath();
-    
-//     // On déforme l'ellipse en fonction de la position de la souris
-//     const distX = Math.abs(mouseX - canvas.width / 2); // Distance horizontale à partir du centre
-//     const distY = Math.abs(mouseY - canvas.height / 2); // Distance verticale à partir du centre
-//     const ellipseWidth = spotlightRadius + distX * 0.2; // La largeur de l'ellipse augmente avec l'éloignement de la souris
-//     const ellipseHeight = spotlightRadius + distY * 0.2; // La hauteur de l'ellipse augmente aussi
-
-//     // Créer l'ellipse déformée en fonction des coordonnées de la souris
-//     overlayCtx.ellipse(mouseX, mouseY, ellipseWidth, ellipseHeight, 0, 0, Math.PI * 2);
-//     overlayCtx.fill();
-
-//     // Ajouter le dégradé sur l'ellipse
-//     overlayCtx.globalCompositeOperation = 'source-over';
-//     overlayCtx.fillStyle = gradient;
-//     overlayCtx.beginPath();
-//     overlayCtx.ellipse(mouseX, mouseY, ellipseWidth + gradientSize, ellipseHeight + gradientSize, 0, 0, Math.PI * 2);
-//     overlayCtx.fill();
-
-//     // Appliquer l'overlay sur le canvas principal
-//     ctx.drawImage(overlayCanvas, 0, 0);
-// }
 
 
 // Créer l'effet spotlight avec distorsion subtile de l'ellipse et du gradient
@@ -249,152 +417,6 @@ function drawSpotlight() {
     ctx.drawImage(overlayCanvas, 0, 0);
 }
 
-
-
-// // Dessiner la lampe torche
-// function drawFlashlight() {
-//     // Calculer l'angle vers la souris
-//     const dx = mouseX - flashlightX;
-//     const dy = mouseY - flashlightY;
-//     flashlightAngle = Math.atan2(dy, dx);
-    
-//     ctx.save();
-//     ctx.translate(flashlightX, flashlightY);
-//     ctx.rotate(flashlightAngle);
-    
-//     // Corps de la lampe (manche)
-//     ctx.fillStyle = '#4a4a4a';
-//     ctx.fillRect(-60, -8, 80, 16);
-    
-//     // Bordures du manche
-//     ctx.strokeStyle = '#333';
-//     ctx.lineWidth = 2;
-//     ctx.strokeRect(-60, -8, 80, 16);
-    
-//     // Détails du manche (grip)
-//     ctx.fillStyle = '#555';
-//     for (let i = 0; i < 5; i++) {
-//         ctx.fillRect(-50 + i * 12, -6, 2, 12);
-//     }
-    
-//     // Tête de la lampe
-//     ctx.fillStyle = '#666';
-//     ctx.fillRect(20, -12, 25, 24);
-    
-//     // Bordure de la tête
-//     ctx.strokeStyle = '#333';
-//     ctx.lineWidth = 2;
-//     ctx.strokeRect(20, -12, 25, 24);
-    
-//     // Lentille
-//     ctx.fillStyle = '#e6e6e6';
-//     ctx.beginPath();
-//     ctx.arc(32, 0, 8, 0, Math.PI * 2);
-//     ctx.fill();
-    
-//     // Reflet sur la lentille
-//     ctx.fillStyle = '#fff';
-//     ctx.beginPath();
-//     ctx.arc(30, -2, 3, 0, Math.PI * 2);
-//     ctx.fill();
-    
-//     // Bouton on/off
-//     ctx.fillStyle = '#2a2a2a';
-//     ctx.fillRect(-25, -3, 6, 6);
-    
-//     ctx.restore();
-// }
-
-// // Dessiner la lampe torche avec effet 3D et mise à l'échelle
-// function drawFlashlight() {
-//     // Calculer l'angle vers la souris
-//     const dx = mouseX - flashlightX;
-//     const dy = mouseY - flashlightY;
-//     flashlightAngle = Math.atan2(dy, dx);
-    
-//     // Appliquer la mise à l'échelle pour l'effet 3D
-//     const scaleFactor = 2 ;  // Facteur de mise à l'échelle pour un effet 3D
-//     ctx.save();
-//     ctx.translate(flashlightX, flashlightY);
-//     ctx.rotate(flashlightAngle);
-//     ctx.scale(scaleFactor, scaleFactor); // Appliquer l'échelle
-    
-//     // Corps de la lampe (manche) avec effet de lumière et ombre
-//     ctx.fillStyle = '#4a4a4a';
-//     ctx.fillRect(-60, -8, 80, 16);
-    
-//     // Ombre portée pour le manche
-//     ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-//     ctx.fillRect(-60 + 4, -8 + 4, 80, 16);  // Ombre légèrement décalée
-    
-//     // effet autour de la lampe
-//     ctx.fillStyle = 'rgba(231, 244, 48, 0.1)';
-//     ctx.beginPath();
-//     // ctx.arc(20 +12, 0, 18, 12, Math.PI+2);
-//     ctx.ellipse(20 +22, 0, 18 + 2, 20 + 2, 69, 0, Math.PI * 2);
-//     ctx.fill();
-
-    
-//     // Bordures du manche
-//     ctx.strokeStyle = '#333fff'; // inshalka cest beau
-//     ctx.lineWidth = 2;
-//     ctx.strokeRect(-60, -8, 80, 16);
-    
-//     // Détails du manche (grip)
-//     ctx.fillStyle = '#555';
-//     for (let i = 0; i < 5; i++) {
-//         ctx.fillRect(-50 + i * 12, -6, 2, 12);
-//     }
-    
-//     // Ombre portée sur le grip
-//     ctx.fillStyle = 'rgba(246, 255, 70, 0.5)';
-//     for (let i = 0; i < 5; i++) {
-//         ctx.fillRect(-50 + i * 12 + 4, -6 + 4, 2, 12);  // Ombre légèrement décalée
-//     }
-
-//     // Tête de la lampe avec effet de lumière et ombre
-//     // ctx.fillStyle = '#666';
-//     // ctx.fillRect(20, -12, 25, 24);
-    
-    
-//     // Ombre portée pour la tête de la lampe
-//     // ctx.fillStyle = 'rgba(230, 244, 33, 0.15)';
-//     // ctx.fillRect(20 + 4, -12 + 4, 25, 24);  // Ombre légèrement décalée
-    
-
-//     // Bordure de la tête
-//     ctx.strokeStyle = '#333';
-//     ctx.lineWidth = 2;
-//     ctx.strokeRect(20, -12, 25, 24);
-    
-//     // Lentille avec dégradé et ombre
-//     ctx.fillStyle = '#e6e6e6';
-//     ctx.beginPath();
-//     ctx.arc(32, 0, 8, 0, Math.PI * 2);
-//     ctx.fill();
-    
-//     // Ombre portée sur la lentille
-//     ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-//     ctx.beginPath();
-//     ctx.arc(32 + 2, 0 + 2, 8, 0, Math.PI * 2);  // Ombre légèrement décalée
-//     ctx.fill();
-    
-//     // Reflet sur la lentille (ajout d'un effet lumineux)
-//     ctx.fillStyle = '#fff';
-//     ctx.beginPath();
-//     ctx.arc(30, -2, 3, 0, Math.PI * 2);
-//     ctx.fill();
-    
-//     // Bouton on/off
-//     ctx.fillStyle = '#2a2a2a';
-//     ctx.fillRect(-25, -3, 6, 6);
-    
-//     // Ombre portée pour le bouton
-//     ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-//     ctx.fillRect(-25 + 2, -3 + 2, 6, 6);  // Ombre légèrement décalée
-    
-//     ctx.restore();
-// }
 
 
 function drawFlashlight() {
@@ -458,25 +480,92 @@ function drawFlashlight() {
 
 
 
+function ombre(timestamp) {
+    if (!fadeOutStart) fadeOutStart = timestamp;
+    const elapsed = timestamp - fadeOutStart;
+
+    const duration = 5000; // 500ms
+    const progress = Math.min(elapsed / duration, 1);
+    overlayOpacityFin = 0.8 * (1 - progress);
+
+    const overlayCanvas = document.createElement('canvas');
+    overlayCanvas.width = canvas.width;
+    overlayCanvas.height = canvas.height;
+    const overlayCtx = overlayCanvas.getContext('2d');
+
+    overlayCtx.fillStyle = `rgba(0, 0, 0, ${overlayOpacityFin})`;
+    overlayCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(overlayCanvas, 0, 0);
+
+    if (progress < 1) {
+        requestAnimationFrame(ombre); // continuer le fondu
+    }
+}
 
 
-// Animation principale
-function animate() {
-    // Effacer le canvas
+let overlayOpacityFin = 0.8;
+let isFadingOut = false;
+let fadeStartTime = null;
+const fadeDuration = 500; // en ms
+
+function animate(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Dessiner l'image de fond
     drawBackground();
-    
-    // Appliquer l'effet spotlight
-    drawSpotlight();
-    
-    // Dessiner la lampe torche
-    drawFlashlight();
-    
-    // Continuer l'animation
+
+    if (lumieresData.length !== 0) {
+        drawSpotlight();
+        drawLightHalos();
+        drawFlashlight();
+    } else {
+        // Lancer le fondu si pas déjà lancé
+        if (!isFadingOut) {
+            isFadingOut = true;
+            fadeStartTime = timestamp;
+        }
+
+        // Animer la diminution de l'opacité
+        if (isFadingOut) {
+            const elapsed = timestamp - fadeStartTime;
+            const progress = Math.min(elapsed / fadeDuration, 1);
+            overlayOpacityFin = 0.8 * (1 - progress);
+
+            // Dessiner l'ombre avec opacité animée
+            const overlayCanvas = document.createElement('canvas');
+            overlayCanvas.width = canvas.width;
+            overlayCanvas.height = canvas.height;
+            const overlayCtx = overlayCanvas.getContext('2d');
+            overlayCtx.fillStyle = `rgba(0, 0, 0, ${overlayOpacityFin})`;
+            overlayCtx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(overlayCanvas, 0, 0);
+        }
+    }
+
     requestAnimationFrame(animate);
 }
+
+// // Animation principale
+// function animate() {
+//     // Effacer le canvas
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     drawBackground();
+//     if (lumieresData.length !== 0) {
+//         // Dessiner l'image de fond
+//         // Appliquer l'effet spotlight
+//         drawSpotlight();
+//         drawLightHalos();
+        
+//         // Dessiner la lampe torche
+//         drawFlashlight();
+//     }else{
+//         ombre();
+//     }
+    
+//     // Continuer l'animation
+//     requestAnimationFrame(animate);
+// }
+
+
 
 // Gestion des événements de souris
 canvas.addEventListener('mousemove', (e) => {
@@ -512,3 +601,35 @@ window.changeImage = function(url) {
     };
     newImage.src = url;
 };
+
+
+// canvas.addEventListener('mousemove', (e) => {
+//     const rect = canvas.getBoundingClientRect();
+//     const scale = LOGICAL_WIDTH / rect.width;
+//     targetX = (e.clientX - rect.left) * scale;
+//     targetY = (e.clientY - rect.top) * scale;
+// });
+
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+        e.preventDefault();
+    }
+});
+
+window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+
+
+canvas.addEventListener('click', () => {
+    if (hoveredHaloIndex !== null) {
+        // Valider ce halo
+        const halo = lumieresData[hoveredHaloIndex];
+        lumieresDataValide.push(halo);
+        lumieresData.splice(hoveredHaloIndex, 1);
+        hoveredHaloIndex = null;
+    }
+});
