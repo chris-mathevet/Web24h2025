@@ -27,8 +27,8 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
     
     // Position de la lampe torche (75% de la largeur, en bas)
-    flashlightX = canvas.width * 0.75;
-    flashlightY = canvas.height - 80;
+    flashlightX = canvas.width * 0.80;
+    flashlightY = canvas.height - 20;
     
     // Réinitialiser la position de la souris au centre
     if (!imageLoaded) {
@@ -305,86 +305,157 @@ function drawSpotlight() {
 //     ctx.restore();
 // }
 
-// Dessiner la lampe torche avec effet 3D et mise à l'échelle
+// // Dessiner la lampe torche avec effet 3D et mise à l'échelle
+// function drawFlashlight() {
+//     // Calculer l'angle vers la souris
+//     const dx = mouseX - flashlightX;
+//     const dy = mouseY - flashlightY;
+//     flashlightAngle = Math.atan2(dy, dx);
+    
+//     // Appliquer la mise à l'échelle pour l'effet 3D
+//     const scaleFactor = 2 ;  // Facteur de mise à l'échelle pour un effet 3D
+//     ctx.save();
+//     ctx.translate(flashlightX, flashlightY);
+//     ctx.rotate(flashlightAngle);
+//     ctx.scale(scaleFactor, scaleFactor); // Appliquer l'échelle
+    
+//     // Corps de la lampe (manche) avec effet de lumière et ombre
+//     ctx.fillStyle = '#4a4a4a';
+//     ctx.fillRect(-60, -8, 80, 16);
+    
+//     // Ombre portée pour le manche
+//     ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+//     ctx.fillRect(-60 + 4, -8 + 4, 80, 16);  // Ombre légèrement décalée
+    
+//     // effet autour de la lampe
+//     ctx.fillStyle = 'rgba(231, 244, 48, 0.1)';
+//     ctx.beginPath();
+//     // ctx.arc(20 +12, 0, 18, 12, Math.PI+2);
+//     ctx.ellipse(20 +22, 0, 18 + 2, 20 + 2, 69, 0, Math.PI * 2);
+//     ctx.fill();
+
+    
+//     // Bordures du manche
+//     ctx.strokeStyle = '#333fff'; // inshalka cest beau
+//     ctx.lineWidth = 2;
+//     ctx.strokeRect(-60, -8, 80, 16);
+    
+//     // Détails du manche (grip)
+//     ctx.fillStyle = '#555';
+//     for (let i = 0; i < 5; i++) {
+//         ctx.fillRect(-50 + i * 12, -6, 2, 12);
+//     }
+    
+//     // Ombre portée sur le grip
+//     ctx.fillStyle = 'rgba(246, 255, 70, 0.5)';
+//     for (let i = 0; i < 5; i++) {
+//         ctx.fillRect(-50 + i * 12 + 4, -6 + 4, 2, 12);  // Ombre légèrement décalée
+//     }
+
+//     // Tête de la lampe avec effet de lumière et ombre
+//     // ctx.fillStyle = '#666';
+//     // ctx.fillRect(20, -12, 25, 24);
+    
+    
+//     // Ombre portée pour la tête de la lampe
+//     // ctx.fillStyle = 'rgba(230, 244, 33, 0.15)';
+//     // ctx.fillRect(20 + 4, -12 + 4, 25, 24);  // Ombre légèrement décalée
+    
+
+//     // Bordure de la tête
+//     ctx.strokeStyle = '#333';
+//     ctx.lineWidth = 2;
+//     ctx.strokeRect(20, -12, 25, 24);
+    
+//     // Lentille avec dégradé et ombre
+//     ctx.fillStyle = '#e6e6e6';
+//     ctx.beginPath();
+//     ctx.arc(32, 0, 8, 0, Math.PI * 2);
+//     ctx.fill();
+    
+//     // Ombre portée sur la lentille
+//     ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+//     ctx.beginPath();
+//     ctx.arc(32 + 2, 0 + 2, 8, 0, Math.PI * 2);  // Ombre légèrement décalée
+//     ctx.fill();
+    
+//     // Reflet sur la lentille (ajout d'un effet lumineux)
+//     ctx.fillStyle = '#fff';
+//     ctx.beginPath();
+//     ctx.arc(30, -2, 3, 0, Math.PI * 2);
+//     ctx.fill();
+    
+//     // Bouton on/off
+//     ctx.fillStyle = '#2a2a2a';
+//     ctx.fillRect(-25, -3, 6, 6);
+    
+//     // Ombre portée pour le bouton
+//     ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+//     ctx.fillRect(-25 + 2, -3 + 2, 6, 6);  // Ombre légèrement décalée
+    
+//     ctx.restore();
+// }
+
+
 function drawFlashlight() {
     // Calculer l'angle vers la souris
     const dx = mouseX - flashlightX;
     const dy = mouseY - flashlightY;
     flashlightAngle = Math.atan2(dy, dx);
-    
-    // Appliquer la mise à l'échelle pour l'effet 3D
-    const scaleFactor = 2;  // Facteur de mise à l'échelle pour un effet 3D
+
+    // Appliquer mise à l'échelle et transformation
+    const scaleFactor = 2;
     ctx.save();
     ctx.translate(flashlightX, flashlightY);
     ctx.rotate(flashlightAngle);
-    ctx.scale(scaleFactor, scaleFactor); // Appliquer l'échelle
-    
-    // Corps de la lampe (manche) avec effet de lumière et ombre
-    ctx.fillStyle = '#4a4a4a';
-    ctx.fillRect(-60, -8, 80, 16);
-    
-    // Ombre portée pour le manche
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-    ctx.fillRect(-60 + 4, -8 + 4, 80, 16);  // Ombre légèrement décalée
+    ctx.scale(scaleFactor, scaleFactor);
 
-    // Bordures du manche
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(-60, -8, 80, 16);
-    
-    // Détails du manche (grip)
-    ctx.fillStyle = '#555';
-    for (let i = 0; i < 5; i++) {
-        ctx.fillRect(-50 + i * 12, -6, 2, 12);
-    }
-    
-    // Ombre portée sur le grip
-    ctx.fillStyle = 'rgba(246, 255, 70, 0.5)';
-    for (let i = 0; i < 5; i++) {
-        ctx.fillRect(-50 + i * 12 + 4, -6 + 4, 2, 12);  // Ombre légèrement décalée
-    }
+    // Corps de la lampe (manche)
+    ctx.fillStyle = '#2c2c2c'; // gris foncé uniforme
+    ctx.fillRect(-50, -6, 70, 12);
 
-    // Tête de la lampe avec effet de lumière et ombre
-    ctx.fillStyle = '#666';
-    ctx.fillRect(20, -12, 25, 24);
-    
-    // Ombre portée pour la tête de la lampe
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.15)';
-    ctx.fillRect(20 + 4, -12 + 4, 25, 24);  // Ombre légèrement décalée
-    
+    // Tête de la lampe (plus large et inclinée)
+    ctx.beginPath();
+    ctx.moveTo(20, -10);
+    ctx.lineTo(45, -14);
+    ctx.lineTo(45, 14);
+    ctx.lineTo(20, 10);
+    ctx.closePath();
+    ctx.fillStyle = '#3a3a3a';
+    ctx.fill();
+
     // Bordure de la tête
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(20, -12, 25, 24);
-    
-    // Lentille avec dégradé et ombre
-    ctx.fillStyle = '#e6e6e6';
+    ctx.strokeStyle = '#1f1f1f';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Lentille ronde (simulée au bout de la tête)
     ctx.beginPath();
-    ctx.arc(32, 0, 8, 0, Math.PI * 2);
+    ctx.arc(44, 0, 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#f1f1f1';
     ctx.fill();
-    
-    // Ombre portée sur la lentille
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+
+    // Halo de lumière doux
     ctx.beginPath();
-    ctx.arc(32 + 2, 0 + 2, 8, 0, Math.PI * 2);  // Ombre légèrement décalée
+    ctx.ellipse(55, 0, 15, 20, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 150, 0.1)';
     ctx.fill();
-    
-    // Reflet sur la lentille (ajout d'un effet lumineux)
-    ctx.fillStyle = '#fff';
+
+    // Bouton rond jaune
     ctx.beginPath();
-    ctx.arc(30, -2, 3, 0, Math.PI * 2);
+    ctx.arc(-15, 0, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#fcd440';
     ctx.fill();
-    
-    // Bouton on/off
-    ctx.fillStyle = '#2a2a2a';
-    ctx.fillRect(-25, -3, 6, 6);
-    
-    // Ombre portée pour le bouton
+
+    // Ombre du bouton
+    ctx.beginPath();
+    ctx.arc(-14, 1, 3, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-    ctx.fillRect(-25 + 2, -3 + 2, 6, 6);  // Ombre légèrement décalée
-    
+    ctx.fill();
+
     ctx.restore();
 }
+
 
 
 
