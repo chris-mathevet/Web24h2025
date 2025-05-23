@@ -5,7 +5,6 @@ function afficherTexte(texte, container) {
     const msPerChar = 80; // 🕒 temps moyen par caractère
 
     texte.split("").forEach((char, i) => {
-        console.log(char)
         const span = document.createElement("span");
         span.textContent = char;
         span.classList.add("letter");
@@ -41,4 +40,9 @@ function afficherTexte(texte, container) {
 export async function afficherTexteScene(json, scene, container) {
     const data = await jsonreader(json);
     afficherTexte(data[scene]["texte"], container);
+    const audio = new Audio(data[scene]["audio"]);
+    audio.volume = 0.5;
+    container.addEventListener('click', () => {
+        audio.play();
+  });
 }
