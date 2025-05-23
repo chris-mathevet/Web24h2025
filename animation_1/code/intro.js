@@ -1,7 +1,7 @@
 const canvas = document.getElementById('scene');
 const ctx = canvas.getContext('2d');
 
-const assets_src = "../assets/"
+const assets_src = "./animation_1/assets/"
 
 // Chargement des images
 const images = {
@@ -99,6 +99,12 @@ canvas.addEventListener('click', () => {
     
   }
 });
+
+
+function fin_animation(){
+  location.href("./pages/page.php")
+}
+
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
