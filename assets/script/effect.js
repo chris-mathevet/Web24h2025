@@ -433,10 +433,12 @@ function animate(timestamp) {
             ctx.drawImage(overlayCanvas, 0, 0);
 
             // COUPER ANIMATION ICI
-                 if (progressAnime >= 1 && !hasAnimationEnded) {
+            if (progressAnime >= 1 && !hasAnimationEnded) {
                 hasAnimationEnded = true;
                 cancelAnimationFrame(animationFrameId); // stop l’animation
-                afficherTexteScene(scenesData[sceneIndex], document.getElementById("text-container"));
+                setTimeout(()=>{
+                    afficherTexteScene(scenesData[sceneIndex], document.getElementById("text-container"));
+                },1000)
                 return; // on arrête ici pour ne pas redemander une frame
             }
         }
