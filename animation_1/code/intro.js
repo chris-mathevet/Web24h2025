@@ -68,6 +68,10 @@ let fadeImageWidth = 0;
 let fadeImageHeight = 0;
 let fadePhase = null; // 'in', 'hold', 'out'
 
+let clickLocked = false; // état du verrou
+let inrun = false;
+
+
 
 
 
@@ -88,20 +92,21 @@ Promise.all(
 
 
 canvas.addEventListener('click', () => {
+  if (clickLocked) return; // ignore le clic s'il est trop tôt
+  clickLocked = true;
+  setTimeout(() => clickLocked = false, 200); // relâche le verrou après 200ms
+
   if (introVisible) {
     narration.play();
-    let rideau = new Audio(assets_src+"rideau.mp3");
+    let rideau = new Audio(assets_src + "rideau.mp3");
     rideau.play();
     introVisible = false;
     state = 'allum';
     animateOuverture();
     return;
   }
-  // if (state === 'rideaux') {
-  //   state = 'allum';
-  //   animateOuverture();
-  // } 
-  else if (state === 'vitrine') {
+
+  if (state === 'vitrine') {
     click_a_casser--;
     shakeVitrine();
     if (click_a_casser <= 0) {
@@ -112,11 +117,13 @@ canvas.addEventListener('click', () => {
       const vitrineY = (canvas.height - vitrineHeight) / 1.8;
       startGlassBreakAnimation(vitrineX, vitrineY, vitrineWidth, vitrineHeight);
     }
-  } if (state === 'eteint') {
-    
-    narration = new Audio(assets_src+"Texte-2.mp3")
-    narration.pause()
-    narration.currentTime=0;
+  }
+
+  if (state === 'eteint' && inrun == false) {
+    inrun = true;
+    narration = new Audio(assets_src + "Texte-2.mp3");
+    narration.pause();
+    narration.currentTime = 0;
     narration.play();
 
     draw(); // ou autre action
@@ -127,14 +134,15 @@ canvas.addEventListener('click', () => {
         showExclamation = false;
         draw();
         setTimeout(() => {
-            isFadingOut = true;
-            fadeOpacity = 0;
-            animateFadeOut();
+          isFadingOut = true;
+          fadeOpacity = 0;
+          animateFadeOut();
         }, 6000);
       }, 3000);
     }, 3000);
   }
 });
+
 
 async function animateFadeOut() {
   return new Promise(resolve => {
