@@ -2,6 +2,11 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const loading = document.getElementById('loading');
 
+import { afficherTexteScene } from './afficherTexte.js';
+import jsonreader from './jsonreader.js';
+
+let sceneIndex = 0
+
 // Variables pour l'effet
 let mouseX = 0;
 let mouseY = 0;
@@ -28,13 +33,8 @@ let hoveredHaloIndex = null; // -1 ou null = rien en hover
 
 // loead le fichier json des lumieres
 async function loadLumieres() {
-    try {
-        const response = await fetch('../assets/data/lumieres.json');
-        const data = await response.json();
-        lumieresData = data.type;
-    } catch (e) {
-        console.error("Erreur lors du chargement du fichier lumieres.json", e);
-    }
+    let scene = await jsonreader("../assets/data/data.json");
+    lumieresData = scene[sceneIndex]["interest"];
 }
 
 // function drawLightHalos() {
@@ -508,6 +508,9 @@ let overlayOpacityFin = 0.8;
 let isFadingOut = false;
 let fadeStartTime = null;
 const fadeDuration = 500; // en ms
+let progressAnime = -1;
+let animationFrameId; 
+let hasAnimationEnded = false;
 
 function animate(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -527,8 +530,8 @@ function animate(timestamp) {
         // Animer la diminution de l'opacité
         if (isFadingOut) {
             const elapsed = timestamp - fadeStartTime;
-            const progress = Math.min(elapsed / fadeDuration, 1);
-            overlayOpacityFin = 0.8 * (1 - progress);
+            progressAnime = Math.min(elapsed / fadeDuration, 1);
+            overlayOpacityFin = 0.8 * (1 - progressAnime);
 
             // Dessiner l'ombre avec opacité animée
             const overlayCanvas = document.createElement('canvas');
@@ -538,10 +541,18 @@ function animate(timestamp) {
             overlayCtx.fillStyle = `rgba(0, 0, 0, ${overlayOpacityFin})`;
             overlayCtx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(overlayCanvas, 0, 0);
+
+            // COUPER ANIMATION ICI
+                 if (progressAnime >= 1 && !hasAnimationEnded) {
+                hasAnimationEnded = true;
+                cancelAnimationFrame(animationFrameId); // stop l’animation
+                afficherTexteScene("../assets/data/data.json", 0, document.getElementById("text-container"));
+                return; // on arrête ici pour ne pas redemander une frame
+            }
         }
     }
+    animationFrameId = requestAnimationFrame(animate);
 
-    requestAnimationFrame(animate);
 }
 
 // // Animation principale

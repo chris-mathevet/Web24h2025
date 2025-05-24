@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Effet Spotlight Canvas</title>
     <meta name="viewport" content="width=1920px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../assets/style/style.css"/>
+
     <style>
         * {
             margin: 0;
@@ -52,8 +54,10 @@
     </style>
 </head>
 <body>
+    <div id="text-container" style="display:none;"></div>
+
     <canvas id="canvas" width="1920" height="1080"></canvas>
     <div class="loading" id="loading">Chargement de l'image...</div>
-    <script src="../assets/script/effect.js"></script>
+    <script type="module" src="../assets/script/effect.js"></script>
 </body>
 </html>                                                               
