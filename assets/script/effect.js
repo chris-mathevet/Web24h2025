@@ -8,7 +8,6 @@ const params = new URLSearchParams(window.location.search);
 
 let sceneIndex = params.get("scene")??0;
 
-
 // Variables pour l'effet
 let mouseX = 0;
 let mouseY = 0;
