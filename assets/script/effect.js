@@ -29,143 +29,22 @@ const overlayOpacity = 0.85;
 let lumieresData = [];
 let lumieresDataValide = [];
 let hoveredHaloIndex = null; // -1 ou null = rien en hover
+let scenesData = []
+scenesData = await jsonreader("../assets/data/data.json");
 
-
-// loead le fichier json des lumieres
-async function loadLumieres() {
-    let scene = await jsonreader("../assets/data/data.json");
-    lumieresData = scene[sceneIndex]["interest"];
+function changementScene(){
+    lumieresData = scenesData[sceneIndex]["interest"];
+    loadImage();
+    canvas.addEventListener('click', () => {
+        if (hoveredHaloIndex !== null) {
+            // Valider ce halo
+            const halo = lumieresData[hoveredHaloIndex];
+            lumieresDataValide.push(halo);
+            lumieresData.splice(hoveredHaloIndex, 1);
+            hoveredHaloIndex = null;
+        }
+    });
 }
-
-// function drawLightHalos() {
-//     const scaleX = ctx.canvas.width / 1920;
-//     const scaleY = ctx.canvas.height / 1080;
-
-//     for (const halo of lumieresData) {
-//         const coX = halo.coX * scaleX;
-//         const coY = halo.coY * scaleY;
-//         const radiusX = halo.radiusX * scaleX;
-//         const radiusY = halo.radiusY * scaleY;
-
-//         const gradient = ctx.createRadialGradient(
-//             coX, coY, 0,
-//             coX, coY, Math.max(radiusX, radiusY)
-//         );
-//         gradient.addColorStop(0, halo.colordebut);
-//         gradient.addColorStop(1, halo.colorfin);
-
-//         ctx.fillStyle = gradient;
-//         ctx.beginPath();
-//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
-//         ctx.fill();
-//     }
-// }
-
-
-// function drawLightHalos() {
-//     const scaleX = ctx.canvas.width / 1920;
-//     const scaleY = ctx.canvas.height / 1080;
-
-//     // Spotlight "ellipse" calculée comme dans drawSpotlight
-//     const distX = Math.abs(mouseX - canvas.width / 2);
-//     const distY = Math.abs(mouseY - canvas.height / 2);
-//     const spotlightWidth = spotlightRadius + distX * 0.05;
-//     const spotlightHeight = spotlightRadius + distY * 0.05;
-
-//     for (const halo of lumieresData) {
-//         const coX = halo.coX * scaleX;
-//         const coY = halo.coY * scaleY;
-//         const radiusX = halo.radiusX * scaleX;
-//         const radiusY = halo.radiusY * scaleY;
-
-//         // Vérifier si le halo est dans l'ellipse du spotlight (collision ellipse)
-//         const dx = coX - mouseX;
-//         const dy = coY - mouseY;
-
-//         const inSpotlight = (dx * dx) / ((spotlightWidth + gradientSize) ** 2) + (dy * dy) / ((spotlightHeight + gradientSize) ** 2) <= 1;
-
-//         const gradient = ctx.createRadialGradient(
-//             coX, coY, 0,
-//             coX, coY, Math.max(radiusX, radiusY)
-//         );
-
-//         gradient.addColorStop(0, inSpotlight ? halo.colorfin : halo.colordebut);
-//         gradient.addColorStop(1, inSpotlight ? halo.colorfin : halo.colorfin);
-
-//         ctx.fillStyle = gradient;
-//         ctx.beginPath();
-//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
-//         ctx.fill();
-//     }
-// }
-
-
-// function drawLightHalos() {
-//     const scaleX = ctx.canvas.width / 1920;
-//     const scaleY = ctx.canvas.height / 1080;
-
-//     const distX = Math.abs(mouseX - canvas.width / 2);
-//     const distY = Math.abs(mouseY - canvas.height / 2);
-//     const spotlightWidth = spotlightRadius + distX * 0.05;
-//     const spotlightHeight = spotlightRadius + distY * 0.05;
-
-//     // 1. DESSINER TOUS CEUX DÉJÀ VALIDÉS
-//     for (const halo of lumieresDataValide) {
-//         const coX = halo.coX * scaleX;
-//         const coY = halo.coY * scaleY;
-//         const radiusX = halo.radiusX * scaleX;
-//         const radiusY = halo.radiusY * scaleY;
-
-//         const gradient = ctx.createRadialGradient(
-//             coX, coY, 0,
-//             coX, coY, Math.max(radiusX, radiusY)
-//         );
-//         gradient.addColorStop(0, halo.colorfin);
-//         gradient.addColorStop(1, halo.colorfin);
-
-//         ctx.fillStyle = gradient;
-//         ctx.beginPath();
-//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
-//         ctx.fill();
-//     }
-
-//     // 2. DESSINER CEUX NON VALIDÉS, ET TESTER SI ILS PASSENT EN VALIDÉ
-//     // On doit utiliser une copie pour éviter de modifier un tableau pendant qu’on le parcourt
-//     for (let i = lumieresData.length - 1; i >= 0; i--) {
-//         const halo = lumieresData[i];
-
-//         const coX = halo.coX * scaleX;
-//         const coY = halo.coY * scaleY;
-//         const radiusX = halo.radiusX * scaleX;
-//         const radiusY = halo.radiusY * scaleY;
-
-//         const dx = coX - mouseX;
-//         const dy = coY - mouseY;
-//         const inSpotlight = (dx * dx) / ((spotlightWidth + gradientSize) ** 2) +
-//                             (dy * dy) / ((spotlightHeight + gradientSize) ** 2) <= 1;
-
-//         if (inSpotlight) {
-//             // Déplacer vers les validés
-//             lumieresDataValide.push(halo);
-//             lumieresData.splice(i, 1);
-//             continue; // Ne le dessine plus ici
-//         }
-
-//         // Dessin normal en colordebut
-//         const gradient = ctx.createRadialGradient(
-//             coX, coY, 0,
-//             coX, coY, Math.max(radiusX, radiusY)
-//         );
-//         gradient.addColorStop(0, halo.colordebut);
-//         gradient.addColorStop(1, halo.colorfin);
-
-//         ctx.fillStyle = gradient;
-//         ctx.beginPath();
-//         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
-//         ctx.fill();
-//     }
-// }
-
 
 function drawLightHalos() {
     const scaleX = ctx.canvas.width / 1920;
@@ -230,11 +109,6 @@ function drawLightHalos() {
         ctx.fill();
     }
 }
-
-const LOGICAL_WIDTH = 1920;
-const LOGICAL_HEIGHT = 1080;
-
-
 
 // Redimensionner le canvas
 function resizeCanvas() {
@@ -309,7 +183,6 @@ function loadImage() {
         loading.style.display = 'none';
         mouseX = targetX = canvas.width / 2;
         mouseY = targetY = canvas.height / 2;
-        await loadLumieres();  // 👈 Charge le JSON avant d'animer
         animate();   
     };
     image.onerror = async function() {
@@ -317,12 +190,10 @@ function loadImage() {
         imageLoaded = true;
         mouseX = targetX = canvas.width / 2;
         mouseY = targetY = canvas.height / 2;
-
-        await loadLumieres();  // 👈 Même chose ici
-        animate();    
+        animate();
     };
     // Votre image locale
-    image.src = '../assets/img/chris.png';
+    image.src = scenesData[sceneIndex]["image"];
 }
 
 // Dessiner l'image de fond
@@ -360,7 +231,6 @@ function drawBackground() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 }
-
 
 // Créer l'effet spotlight avec distorsion subtile de l'ellipse et du gradient
 function drawSpotlight() {
@@ -416,8 +286,6 @@ function drawSpotlight() {
     // Appliquer l'overlay sur le canvas principal
     ctx.drawImage(overlayCanvas, 0, 0);
 }
-
-
 
 function drawFlashlight() {
     // Calculer l'angle vers la souris
@@ -478,8 +346,6 @@ function drawFlashlight() {
     ctx.restore();
 }
 
-
-
 function ombre(timestamp) {
     if (!fadeOutStart) fadeOutStart = timestamp;
     const elapsed = timestamp - fadeOutStart;
@@ -502,7 +368,6 @@ function ombre(timestamp) {
         requestAnimationFrame(ombre); // continuer le fondu
     }
 }
-
 
 let overlayOpacityFin = 0.8;
 let isFadingOut = false;
@@ -546,37 +411,13 @@ function animate(timestamp) {
                  if (progressAnime >= 1 && !hasAnimationEnded) {
                 hasAnimationEnded = true;
                 cancelAnimationFrame(animationFrameId); // stop l’animation
-                afficherTexteScene("../assets/data/data.json", 0, document.getElementById("text-container"));
+                afficherTexteScene(scenesData[sceneIndex], document.getElementById("text-container"));
                 return; // on arrête ici pour ne pas redemander une frame
             }
         }
     }
     animationFrameId = requestAnimationFrame(animate);
-
 }
-
-// // Animation principale
-// function animate() {
-//     // Effacer le canvas
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
-//     drawBackground();
-//     if (lumieresData.length !== 0) {
-//         // Dessiner l'image de fond
-//         // Appliquer l'effet spotlight
-//         drawSpotlight();
-//         drawLightHalos();
-        
-//         // Dessiner la lampe torche
-//         drawFlashlight();
-//     }else{
-//         ombre();
-//     }
-    
-//     // Continuer l'animation
-//     requestAnimationFrame(animate);
-// }
-
-
 
 // Gestion des événements de souris
 canvas.addEventListener('mousemove', (e) => {
@@ -595,7 +436,7 @@ window.addEventListener('resize', resizeCanvas);
 
 // Initialisation
 resizeCanvas();
-loadImage();
+changementScene();
 
 // Fonction pour changer l'image (vous pouvez l'appeler depuis la console)
 window.changeImage = function(url) {
@@ -614,13 +455,6 @@ window.changeImage = function(url) {
 };
 
 
-// canvas.addEventListener('mousemove', (e) => {
-//     const rect = canvas.getBoundingClientRect();
-//     const scale = LOGICAL_WIDTH / rect.width;
-//     targetX = (e.clientX - rect.left) * scale;
-//     targetY = (e.clientY - rect.top) * scale;
-// });
-
 document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
         e.preventDefault();
@@ -635,12 +469,3 @@ window.addEventListener('wheel', (e) => {
 
 
 
-canvas.addEventListener('click', () => {
-    if (hoveredHaloIndex !== null) {
-        // Valider ce halo
-        const halo = lumieresData[hoveredHaloIndex];
-        lumieresDataValide.push(halo);
-        lumieresData.splice(hoveredHaloIndex, 1);
-        hoveredHaloIndex = null;
-    }
-});

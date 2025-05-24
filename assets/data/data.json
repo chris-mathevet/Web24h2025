@@ -1,5 +1,6 @@
 {
     "0": {
+        "image" : "/assets/img/quais-sans-lumiere.png",
         "texte": "En 1168, une première église dédiée à la Vierge est construite à Fourvière, à Lyon. Détruite pendant les guerres de religion, elle est ensuite restaurée. Le 8 septembre 1643, alors que la peste menace la ville, les échevins et le prévôt des marchands montent à Fourvière pour implorer la protection de la Vierge Marie. Ils font le vœu de renouveler chaque année ce pèlerinage si Lyon est épargnée. Depuis, cette tradition est perpétuée chaque 8 septembre.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
@@ -33,6 +34,7 @@
         ]
     },
     "1": {
+        "image" : "/assets/img/quais-sans-lumiere.png",
         "texte": "En 1850, un concours est lancé pour ériger une statue religieuse sur la colline de Fourvière. C’est le sculpteur Joseph-Hugues Fabisch qui la réalise. L’inauguration, prévue pour le 8 septembre 1852, est reportée au 8 décembre à cause d’une crue. Ce jour-là, le mauvais temps menace encore la cérémonie, mais le ciel finit par se dégager. Spontanément, les Lyonnais allument des bougies à leurs fenêtres, illuminant toute la ville. Les autorités religieuses suivent le mouvement, et la chapelle de Fourvière se dévoile dans la nuit. Ainsi naît une tradition lumineuse.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
@@ -66,6 +68,7 @@
         ]
     },
     "2": {
+        "image" : "/assets/img/quais-sans-lumiere.png",
         "texte": "Chaque 8 décembre, les Lyonnaises et les Lyonnais perpétuent la tradition en plaçant des lumignons à leurs fenêtres et en explorant la ville pour admirer des installations lumineuses. En 1989, l’éclairage des monuments, paysages et quartiers transforme Lyon la nuit. Depuis 1999, cette célébration est devenue la Fête des Lumières, un événement majeur qui s’étend désormais sur quatre jours.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
@@ -99,6 +102,7 @@
         ]
     },
     "3": {
+        "image" : "/assets/img/quais-sans-lumiere.png",
         "texte": "Le Plan Lumière, lancé à Lyon en 1989, a transformé l’éclairage urbain en un véritable projet artistique, technique et politique. Il met en valeur les monuments, les fleuves et les quartiers, créant un « paysage nocturne urbain » unique. En 2005, un nouveau plan intègre le développement durable et s'étend au-delà des monuments pour illuminer les territoires selon leur identité. Avec près de 1 000 nouveaux points lumineux par an et une baisse de 33 % de la consommation énergétique, Lyon est aujourd’hui un modèle international en matière d’éclairage urbain.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
@@ -132,6 +136,7 @@
         ]
     },
     "4": {
+        "image" : "/assets/img/quais-sans-lumiere.png",
         "texte": "En 2002, la Ville de Lyon fonde LUCI (Lighting Urban Community International), un réseau international réunissant plus de 110 membres – dont 70 villes – autour de l’importance de la lumière dans le développement urbain. LUCI vise à échanger des expériences, promouvoir les meilleures pratiques et faire progresser la réflexion sur l’éclairage urbain à travers conférences, projets de recherche et coopération. Ce réseau offre un espace de dialogue et d’innovation pour imaginer la lumière de demain.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
@@ -165,6 +170,7 @@
         ]
     },
     "5": {
+        "image" : "/assets/img/quais-sans-lumiere.png",
         "texte": "La fête de la lumière, c’est déjà plus de 370 lieux emblématiques de la ville, à découvrir sous de magnifiques éclairages. À travers cette expérience, vous avez pu appréhender cette resplendissante fête. Nous vous invitons à venir expérimenter entièrement cette tradition vieille de plus d’une centaine d’années à nos côtés, du vendredi 5 au lundi 8 décembre 2025. Nous espérons vous y voir !",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [

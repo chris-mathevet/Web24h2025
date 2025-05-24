@@ -37,11 +37,10 @@ function afficherTexte(texte, container) {
     }, 1000)
 }
 
-export async function afficherTexteScene(json, scene, container) {
+export async function afficherTexteScene(scene, container) {
     container.style.display = "block";
-    const data = await jsonreader(json);
-    const audio = new Audio(data[scene]["audio"]);
-    afficherTexte(data[scene]["texte"], container);
+    const audio = new Audio(scene["audio"]);
+    afficherTexte(scene["texte"], container);
     audio.volume = 0.5;
     audio.play();
 }
