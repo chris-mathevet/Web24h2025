@@ -54,6 +54,7 @@
 </head>
 <body id="body">
     <h1 id="titre"></h1>
+    <p id="score">0/1</p>
     <div id="text-container" style="display:none;"></div>
 
     <canvas id="canvas" width="1920" height="1080"></canvas>

@@ -16,6 +16,9 @@ let targetY = 0;
 let image = null;
 let imageLoaded = false;
 
+const scaleX = ctx.canvas.width / 1920;
+const scaleY = ctx.canvas.height / 1080;
+
 // Variables pour la lampe
 let flashlightX = 0;
 let flashlightY = 0;
@@ -31,6 +34,7 @@ let lumieresData = [];
 let lumieresDataValide = [];
 let hoveredHaloIndex = null; // -1 ou null = rien en hover
 let scenesData = []
+let maxScore = 0;
 scenesData = await jsonreader("../assets/data/data.json");
 
 const audioClickLigths = new Audio("../assets/audio/light-switch.mp3");
@@ -52,6 +56,7 @@ function changementScene(){
 
     document.getElementById("titre").textContent = scenesData[sceneIndex]["titre"]
     lumieresData = scenesData[sceneIndex]["interest"];
+    maxScore = lumieresData.length;
 
     loadImage();
     canvas.addEventListener('click', () => {
@@ -61,6 +66,7 @@ function changementScene(){
             lumieresDataValide.push(halo);
             lumieresData.splice(hoveredHaloIndex, 1);
             hoveredHaloIndex = null;
+            changeScore();
             if(lumieresData.length == 0){
                 success.play();
                 image = new Image();
@@ -73,9 +79,13 @@ function changementScene(){
     });
 }
 
+function changeScore(){
+    let txt = document.getElementById("score");
+    txt.textContent = lumieresDataValide.length+"/"+maxScore;
+}
+
 function drawLightHalos() {
-    const scaleX = ctx.canvas.width / 1920;
-    const scaleY = ctx.canvas.height / 1080;
+
 
     const distX = Math.abs(mouseX - canvas.width / 2);
     const distY = Math.abs(mouseY - canvas.height / 2);
@@ -135,6 +145,31 @@ function drawLightHalos() {
         ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
         ctx.fill();
     }
+
+    drawScore();
+
+}
+
+function drawScore(){
+    const coX = 1650 * scaleX;
+    const coY = 40 * scaleY;
+    const radiusX = 20 * scaleX;
+    const radiusY = 30 * scaleY;
+    
+
+    const gradient = ctx.createRadialGradient(
+        coX, coY, 0,
+        coX, coY, Math.max(radiusX, radiusY)
+    );
+    gradient.addColorStop(0, "#ff920080");
+    gradient.addColorStop(1, "#ffffff80");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.ellipse(coX, coY, radiusX, radiusY, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    changeScore();
 }
 
 // Redimensionner le canvas

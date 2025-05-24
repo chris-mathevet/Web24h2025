@@ -89,3 +89,12 @@
 .boutonSuite:hover {
     background-color: #fdd835;
 }
+
+#score{
+    font-size: 2rem;
+    position: absolute;
+    right: 14rem;
+    top: 1.5rem;
+    z-index: 100000000;
+    color: white;
+}
