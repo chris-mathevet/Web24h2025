@@ -4,8 +4,10 @@ const loading = document.getElementById('loading');
 
 import { afficherTexteScene } from './afficherTexte.js';
 import jsonreader from './jsonreader.js';
+const params = new URLSearchParams(window.location.search);
 
-let sceneIndex = 0
+let sceneIndex = params.get("scene");
+
 
 // Variables pour l'effet
 let mouseX = 0;
@@ -467,5 +469,27 @@ window.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
+const attendreBouton = setInterval(() => {
+    const bouton = document.getElementById("NextScene");
+    
+    if (bouton) {
+        if(sceneIndex==5){
+            bouton.remove();
+        }else{
 
+            console.log("bouton");
+            bouton.addEventListener("click", () => {
+                console.log("click btn");
+                console.log("sceneIndex:", sceneIndex, "type:", typeof sceneIndex);
+                let sceneIndex2 = parseInt(sceneIndex, 10);
+                
+                if (scenesData.hasOwnProperty(`${sceneIndex2 + 1}`)) {
+                    console.log(`${sceneIndex2 + 1}`);
+                    window.location.href = `?scene=${sceneIndex2 + 1}`;
+                }
+            });
+        }
 
+        clearInterval(attendreBouton); 
+    }
+}, 100);
