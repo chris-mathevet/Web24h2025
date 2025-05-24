@@ -2,12 +2,13 @@
     "0": {
         "titre": "Musée des Confluences",
         "image" : "/assets/img/musee.png",
-        "texte": "En 1168, une première église dédiée à la Vierge est construite à Fourvière, à Lyon. Détruite pendant les guerres de religion, elle est ensuite restaurée. Le 8 septembre 1643, alors que la peste menace la ville, les échevins et le prévôt des marchands montent à Fourvière pour implorer la protection de la Vierge Marie. Ils font le vœu de renouveler chaque année ce pèlerinage si Lyon est épargnée. Depuis, cette tradition est perpétuée chaque 8 septembre.",
+        "imageFin" : "/assets/img/musee.png",
+        "texte": "En 1168, nous avons vu naître une première église dédiée à la Vierge, ici à Fourvière, à Lyon. Bien qu’elle ait été détruite pendant les guerres de religion, nous l’avons restaurée avec ferveur. Le 8 septembre 1643, alors que la peste menaçait notre ville, nos échevins et le prévôt des marchands sont montés à Fourvière pour implorer la protection de la Vierge Marie. Ils ont fait le vœu de renouveler chaque année ce pèlerinage si Lyon était épargnée. Depuis, nous perpétuons cette tradition chaque 8 septembre, avec la même ferveur.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 602.125,
+                "coY": 407,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -15,8 +16,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
+                "coX": 1089.125,
+                "coY": 788,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -24,8 +25,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 202.125,
+                "coY": 600,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -37,12 +38,13 @@
     "1": {
         "titre": "Quais de Saône",
         "image" : "/assets/img/quais-sans-lumiere.png",
-        "texte": "En 1850, un concours est lancé pour ériger une statue religieuse sur la colline de Fourvière. C’est le sculpteur Joseph-Hugues Fabisch qui la réalise. L’inauguration, prévue pour le 8 septembre 1852, est reportée au 8 décembre à cause d’une crue. Ce jour-là, le mauvais temps menace encore la cérémonie, mais le ciel finit par se dégager. Spontanément, les Lyonnais allument des bougies à leurs fenêtres, illuminant toute la ville. Les autorités religieuses suivent le mouvement, et la chapelle de Fourvière se dévoile dans la nuit. Ainsi naît une tradition lumineuse.",
+        "imageFin" : "/assets/img/quais-saone.png",
+        "texte": "En 1850, nous avons lancé un concours pour ériger une statue religieuse sur notre colline de Fourvière. C’est le sculpteur Joseph-Hugues Fabisch qui l’a réalisée. L’inauguration, prévue pour le 8 septembre 1852, a été reportée au 8 décembre à cause d’une crue. Ce jour-là, malgré un ciel menaçant, le temps s’est éclairci. Spontanément, nous, les Lyonnais, avons allumé des bougies à nos fenêtres, illuminant toute la ville. Nos autorités religieuses ont suivi le mouvement, et la chapelle de Fourvière s’est dévoilée dans la nuit. C’est ainsi que nous avons donné naissance à une tradition lumineuse.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 149.125,
+                "coY": 611,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -50,7 +52,7 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
+                "coX": 1322.125,
                 "coY": 240,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
@@ -59,8 +61,17 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 918.125,
+                "coY": 300,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 960.125,
+                "coY": 650,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -72,20 +83,12 @@
     "2": {
         "titre": "Cathédrale st Jean Baptiste",
         "image" : "/assets/img/cathedrale-sans-lumiere.png",
-        "texte": "Chaque 8 décembre, les Lyonnaises et les Lyonnais perpétuent la tradition en plaçant des lumignons à leurs fenêtres et en explorant la ville pour admirer des installations lumineuses. En 1989, l’éclairage des monuments, paysages et quartiers transforme Lyon la nuit. Depuis 1999, cette célébration est devenue la Fête des Lumières, un événement majeur qui s’étend désormais sur quatre jours.",
+        "imageFin" : "/assets/img/cathedrale.png",
+        "texte": "Chaque 8 décembre, nous, Lyonnaises et Lyonnais, perpétuons cette tradition en plaçant des lumignons à nos fenêtres et en parcourant la ville pour admirer les installations lumineuses. En 1989, nous avons commencé à transformer notre ville la nuit en illuminant monuments, paysages et quartiers. Et depuis 1999, cette célébration est devenue ce que nous appelons aujourd’hui la Fête des Lumières, un événement incontournable qui dure maintenant quatre jours.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 200,
+                "coX": 680.125,
                 "coY": 240,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
@@ -94,8 +97,26 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 180.125,
+                "coY": 705,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 140.125,
+                "coY": 705,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 1100.125,
+                "coY": 755,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -107,12 +128,13 @@
     "3": {
         "titre": "Palais de Justice",
         "image" : "/assets/img/palais-justice-sans-lumiere.png",
-        "texte": "Le Plan Lumière, lancé à Lyon en 1989, a transformé l’éclairage urbain en un véritable projet artistique, technique et politique. Il met en valeur les monuments, les fleuves et les quartiers, créant un « paysage nocturne urbain » unique. En 2005, un nouveau plan intègre le développement durable et s'étend au-delà des monuments pour illuminer les territoires selon leur identité. Avec près de 1 000 nouveaux points lumineux par an et une baisse de 33 % de la consommation énergétique, Lyon est aujourd’hui un modèle international en matière d’éclairage urbain.",
+        "imageFin" : "/assets/img/palais-justice.png",
+        "texte": "Avec le Plan Lumière lancé en 1989, nous avons réinventé l’éclairage urbain : un projet artistique, technique et politique. Nous avons choisi de mettre en valeur nos monuments, nos fleuves, nos quartiers, pour créer un paysage nocturne unique. En 2005, nous avons franchi une nouvelle étape en intégrant le développement durable, illuminant aussi les territoires selon leur identité. Grâce à près de 1 000 nouveaux points lumineux chaque année, et une baisse de 33 % de notre consommation énergétique, nous faisons aujourd’hui de Lyon un modèle reconnu dans le monde entier.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 947.125,
+                "coY": 603,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -120,17 +142,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 1699.125,
+                "coY": 770,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -142,30 +155,13 @@
     "4": {
         "titre": "Palais de la bourse",
         "image" : "/assets/img/palais-bourse-sans-lumiere.png",
-        "texte": "En 2002, la Ville de Lyon fonde LUCI (Lighting Urban Community International), un réseau international réunissant plus de 110 membres – dont 70 villes – autour de l’importance de la lumière dans le développement urbain. LUCI vise à échanger des expériences, promouvoir les meilleures pratiques et faire progresser la réflexion sur l’éclairage urbain à travers conférences, projets de recherche et coopération. Ce réseau offre un espace de dialogue et d’innovation pour imaginer la lumière de demain.",
+        "imageFin" : "/assets/img/palais-bourse.png",
+        "texte": "En 2002, nous avons fondé LUCI (Lighting Urban Community International), un réseau qui réunit aujourd’hui plus de 110 membres, dont 70 villes. Ensemble, nous partageons nos expériences, échangeons nos savoir-faire, et faisons progresser la réflexion sur la lumière en ville. À travers des conférences, des projets communs, des recherches et des coopérations, nous imaginons collectivement la lumière de demain.",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 200,
-                "coY": 240,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 845.125,
+                "coY": 870,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -177,12 +173,13 @@
     "5": {
         "titre": "Hotel de ville et Musée des beaux arts",
         "image" : "/assets/img/fin-sans-lumiere.png",
-        "texte": "La fête de la lumière, c’est déjà plus de 370 lieux emblématiques de la ville, à découvrir sous de magnifiques éclairages. À travers cette expérience, vous avez pu appréhender cette resplendissante fête. Nous vous invitons à venir expérimenter entièrement cette tradition vieille de plus d’une centaine d’années à nos côtés, du vendredi 5 au lundi 8 décembre 2025. Nous espérons vous y voir !",
+        "imageFin" : "/assets/img/fin.png",
+        "texte": "La Fête des Lumières, c’est déjà plus de 370 lieux emblématiques de notre ville à découvrir sous de magnifiques éclairages. À travers ce parcours, nous espérons vous avoir transmis un peu de la magie de cette fête qui nous tient tant à cœur. Alors venez la vivre pleinement à nos côtés, du vendredi 5 au lundi 8 décembre 2025. On vous attend avec impatience !",
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 115.125,
+                "coY": 651,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -190,8 +187,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
+                "coX": 1700.125,
+                "coY": 832,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -199,8 +196,17 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 289.125,
+                "coY": 850,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 1203.125,
+                "coY": 160,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",

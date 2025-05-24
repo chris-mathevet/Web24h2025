@@ -8,7 +8,6 @@ const params = new URLSearchParams(window.location.search);
 
 let sceneIndex = params.get("scene")??0;
 
-
 // Variables pour l'effet
 let mouseX = 0;
 let mouseY = 0;
@@ -34,6 +33,19 @@ let hoveredHaloIndex = null; // -1 ou null = rien en hover
 let scenesData = []
 scenesData = await jsonreader("../assets/data/data.json");
 
+const audioClickLigths = new Audio("../assets/audio/light-switch.mp3");
+const success = new Audio("../assets/audio/success.mp3");
+const night = new Audio("../assets/audio/night-ambience.mp3");
+
+success.volume = 0.5;
+audioClickLigths.volume = 0.5;
+night.volume = 0.2;
+night.loop = true;
+document.getElementById("body").addEventListener("click", ()=>{
+    night.play();
+}
+)
+
 function changementScene(){
     console.log(scenesData);
 
@@ -49,6 +61,12 @@ function changementScene(){
             lumieresDataValide.push(halo);
             lumieresData.splice(hoveredHaloIndex, 1);
             hoveredHaloIndex = null;
+            if(lumieresData.length == 0){
+                success.play()
+                image.src = scenesData[sceneIndex]["imageFin"];
+            }
+            else
+                audioClickLigths.play();
         }
     });
 }
@@ -415,10 +433,12 @@ function animate(timestamp) {
             ctx.drawImage(overlayCanvas, 0, 0);
 
             // COUPER ANIMATION ICI
-                 if (progressAnime >= 1 && !hasAnimationEnded) {
+            if (progressAnime >= 1 && !hasAnimationEnded) {
                 hasAnimationEnded = true;
                 cancelAnimationFrame(animationFrameId); // stop l’animation
-                afficherTexteScene(scenesData[sceneIndex], document.getElementById("text-container"));
+                setTimeout(()=>{
+                    afficherTexteScene(scenesData[sceneIndex], document.getElementById("text-container"));
+                },1000)
                 return; // on arrête ici pour ne pas redemander une frame
             }
         }

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="UTF-8">
-    <title>Effet Spotlight Canvas</title>
+    <title>Projet Lumière - JSremove 24H Info 2025</title>
     <meta name="viewport" content="width=1920px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../assets/style/style.css"/>
 
@@ -18,7 +18,6 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             background: #000;
-            cursor: none;
 
         }
 
@@ -53,12 +52,23 @@
         }
     </style>
 </head>
-<body>
-    <h1 id="titre">TEST</h1>
+<body id="body">
+    <h1 id="titre"></h1>
     <div id="text-container" style="display:none;"></div>
 
     <canvas id="canvas" width="1920" height="1080"></canvas>
     <div class="loading" id="loading">Chargement de l'image...</div>
     <script type="module" src="../assets/script/effect.js"></script>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.addEventListener('click', function(event) {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        console.log(`Coordonnées du clic : x=${x}, y=${y}`);
+        });
+    </script>
 </body>
 </html>                                                               
