@@ -94,7 +94,9 @@ canvas.addEventListener('click', () => {
       setTimeout(() => {
         showExclamation = false;
         draw();
+        fin_animation();
       }, 5000);
+
     }, 3000);
     
   }
@@ -102,7 +104,7 @@ canvas.addEventListener('click', () => {
 
 
 function fin_animation(){
-  location.href("./pages/page.php")
+  window.location.href = "./pages/scene.php";
 }
 
 
