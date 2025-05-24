@@ -62,7 +62,9 @@ function changementScene(){
             lumieresData.splice(hoveredHaloIndex, 1);
             hoveredHaloIndex = null;
             if(lumieresData.length == 0){
-                success.play()
+                success.play();
+                image = new Image();
+                image.crossOrigin = 'anonymous';
                 image.src = scenesData[sceneIndex]["imageFin"];
             }
             else

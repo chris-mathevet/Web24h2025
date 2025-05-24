@@ -2,7 +2,7 @@ import jsonreader from "./jsonreader.js";
 
 function afficherTexte(texte, container) {
 
-    const msPerChar = 80; // 🕒 temps moyen par caractère
+    const msPerChar = 60; // 🕒 temps moyen par caractère
 
     texte.split("").forEach((char, i) => {
         const span = document.createElement("span");
