@@ -6,7 +6,7 @@ import { afficherTexteScene } from './afficherTexte.js';
 import jsonreader from './jsonreader.js';
 const params = new URLSearchParams(window.location.search);
 
-let sceneIndex = params.get("scene");
+let sceneIndex = params.get("scene")??0;
 
 
 // Variables pour l'effet
@@ -35,8 +35,12 @@ let scenesData = []
 scenesData = await jsonreader("../assets/data/data.json");
 
 function changementScene(){
+    console.log(scenesData);
+
+
     document.getElementById("titre").textContent = scenesData[sceneIndex]["titre"]
     lumieresData = scenesData[sceneIndex]["interest"];
+
     loadImage();
     canvas.addEventListener('click', () => {
         if (hoveredHaloIndex !== null) {

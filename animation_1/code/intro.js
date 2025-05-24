@@ -104,7 +104,7 @@ canvas.addEventListener('click', () => {
 
 
 function fin_animation(){
-  window.location.href = "./pages/scene.php";
+  window.location.href = "./pages/scene.php?scene=0";
 }
 
 
@@ -391,3 +391,17 @@ function roundRect(ctx, x, y, w, h, r, fill, stroke) {
     ctx.stroke();
   }
 }
+
+
+
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+        e.preventDefault();
+    }
+});
+
+window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) {
+        e.preventDefault();
+    }
+}, { passive: false });
