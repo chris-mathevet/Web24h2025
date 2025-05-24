@@ -61,8 +61,10 @@ function changementScene(){
             lumieresDataValide.push(halo);
             lumieresData.splice(hoveredHaloIndex, 1);
             hoveredHaloIndex = null;
-            if(lumieresData.length == 0)
+            if(lumieresData.length == 0){
                 success.play()
+                image.src = scenesData[sceneIndex]["imageFin"];
+            }
             else
                 audioClickLigths.play();
         }
