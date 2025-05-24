@@ -35,7 +35,10 @@ let scenesData = []
 scenesData = await jsonreader("../assets/data/data.json");
 
 const audioClickLigths = new Audio("../assets/audio/light-switch.mp3");
+const success = new Audio("../assets/audio/success.mp3");
 const night = new Audio("../assets/audio/night-ambience.mp3");
+
+success.volume = 0.5;
 audioClickLigths.volume = 0.5;
 night.volume = 0.2;
 night.loop = true;
@@ -55,11 +58,14 @@ function changementScene(){
     canvas.addEventListener('click', () => {
         if (hoveredHaloIndex !== null) {
             // Valider ce halo
-            audioClickLigths.play();
             const halo = lumieresData[hoveredHaloIndex];
             lumieresDataValide.push(halo);
             lumieresData.splice(hoveredHaloIndex, 1);
             hoveredHaloIndex = null;
+            if(lumieresData.length == 0)
+                success.play()
+            else
+                audioClickLigths.play();
         }
     });
 }
