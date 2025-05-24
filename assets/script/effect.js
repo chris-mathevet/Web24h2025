@@ -423,8 +423,63 @@ function animate(timestamp) {
             }
         }
     }
+
+    applyFishEyeEffect(ctx, canvas, 0.96);
+
     animationFrameId = requestAnimationFrame(animate);
 }
+
+
+function applyFishEyeEffect(ctx, canvas, intensity = 0.3) {
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const imageData = ctx.getImageData(0, 0, width, height);
+    const data = imageData.data;
+
+    // Créer un buffer pour l'image modifiée
+    const output = ctx.createImageData(width, height);
+    const outputData = output.data;
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radius = Math.min(centerX, centerY);
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+
+            // Coordonnées relatives au centre
+            let dx = x - centerX;
+            let dy = y - centerY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            // Calcul du facteur de déformation fish-eye
+            let r = distance / radius;
+            let rDistorted = Math.pow(r, intensity);
+
+            // Nouvelle position déformée
+            let newX = Math.round(centerX + (dx / distance) * rDistorted * radius || x);
+            let newY = Math.round(centerY + (dy / distance) * rDistorted * radius || y);
+
+            // Clamp coordonnées
+            newX = Math.min(width - 1, Math.max(0, newX));
+            newY = Math.min(height - 1, Math.max(0, newY));
+
+            const srcIndex = (newY * width + newX) * 4;
+            const destIndex = (y * width + x) * 4;
+
+            // Copier pixel
+            outputData[destIndex] = data[srcIndex];
+            outputData[destIndex + 1] = data[srcIndex + 1];
+            outputData[destIndex + 2] = data[srcIndex + 2];
+            outputData[destIndex + 3] = data[srcIndex + 3];
+        }
+    }
+
+    // Appliquer l'image déformée
+    ctx.putImageData(output, 0, 0);
+}
+
 
 // Gestion des événements de souris
 canvas.addEventListener('mousemove', (e) => {
