@@ -18,7 +18,7 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             background: #000;
-
+            cursor: none;
         }
 
         #canvas {
