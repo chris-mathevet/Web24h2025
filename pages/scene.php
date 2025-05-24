@@ -53,7 +53,7 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
     <h1 id="titre">TEST</h1>
     <div id="text-container" style="display:none;"></div>
 
