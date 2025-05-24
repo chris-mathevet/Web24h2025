@@ -12,7 +12,11 @@ const images = {
   vitrineCassee: new Image(),
 
   BG_sombre: new Image(),
-  BG_lumin: new Image()
+  BG_lumin: new Image(),
+
+  bateau_musee: new Image(),
+  bateau_justice: new Image(),
+  noir: new Image()
 };
 
 images.rideauGauche.src = assets_src+'rideau_gauche.png';
@@ -23,6 +27,10 @@ images.vitrineCassee.src = assets_src+'vitrine_casse2.png';
 
 images.BG_sombre.src = assets_src+'confluence_sombre.jpg';
 images.BG_lumin.src = assets_src+'confluence.jpg';
+
+images.bateau_musee.src = assets_src+'musee.png';
+images.bateau_justice.src = assets_src+'justice.png';
+images.noir.src = assets_src+'noir.png';
 
 let state = 'rideaux'; // 'rideaux', 'ouverture', 'vitrine', 'cassée'
 let ouvertureProgress = 0;
@@ -49,7 +57,22 @@ for (let i = 1; i <= 5; i++) {
 let introVisible = true;
 let showExclamation = false;
 
+let isFadingOut = false;
+let fadeOpacity = 0;
 
+let fadeImage = null;
+let fadeImageOpacity = 0;
+let fadeImageX = 0;
+let fadeImageY = 0;
+let fadeImageWidth = 0;
+let fadeImageHeight = 0;
+let fadePhase = null; // 'in', 'hold', 'out'
+
+
+
+
+let impact = new Audio(assets_src+"impact.mp3");
+let narration = new Audio(assets_src+"texte-1.mp3");
 
 
 
@@ -66,6 +89,9 @@ Promise.all(
 
 canvas.addEventListener('click', () => {
   if (introVisible) {
+    narration.play();
+    let rideau = new Audio(assets_src+"rideau.mp3");
+    rideau.play();
     introVisible = false;
     state = 'allum';
     animateOuverture();
@@ -87,6 +113,12 @@ canvas.addEventListener('click', () => {
       startGlassBreakAnimation(vitrineX, vitrineY, vitrineWidth, vitrineHeight);
     }
   } if (state === 'eteint') {
+    
+    narration = new Audio(assets_src+"Texte-2.mp3")
+    narration.pause()
+    narration.currentTime=0;
+    narration.play();
+
     draw(); // ou autre action
     setTimeout(() => {
       showExclamation = true;
@@ -94,15 +126,126 @@ canvas.addEventListener('click', () => {
       setTimeout(() => {
         showExclamation = false;
         draw();
-      }, 5000);
+        setTimeout(() => {
+            isFadingOut = true;
+            fadeOpacity = 0;
+            animateFadeOut();
+        }, 6000);
+      }, 3000);
     }, 3000);
     
   }
 });
 
+async function animateFadeOut() {
+  return new Promise(resolve => {
+    const fadeInterval = setInterval(() => {
+      fadeOpacity += 0.02;
+      if (fadeOpacity >= 1) {
+        fadeOpacity = 1;
+        clearInterval(fadeInterval);
+        resolve(); // fin du fade-out
+      }
+      draw(); // Redessine avec le fondu
+    }, 30);
+  }).then(async () => {
+    // Attendre 5 secondes après le fondu noir complet
+    
+    narration = new Audio(assets_src+"Texte-4.mp3")
+    narration.pause()
+    narration.currentTime=0;
+    narration.play();
+
+    let son_fond = new Audio(assets_src+"bruits_pas.mp3");
+    son_fond.pause();
+    son_fond.currentTime = 0;
+    son_fond.play();
+
+
+    await sleep(7000);
+    
+    
+    son_fond.pause();
+    son_fond = new Audio(assets_src+"moteur_bateau_court.mp3");
+    son_fond.currentTime = 0;
+    son_fond.play();
+
+    await sleep(5000);
+
+    // // Affiche la première image
+    // showImageWithFade(
+    //   images.bateau_musee,
+    //   0,
+    //   0,
+    //   canvas.width,
+    //   canvas.height,
+    //   5000
+    // );
+
+    // while (fadeImage != null) {await sleep(500);}
+    // await sleep(2000); // délai partiel avant la seconde image
+
+    // showImageWithFade(
+    //   images.bateau_justice,
+    //   0,
+    //   0,
+    //   canvas.width,
+    //   canvas.height,
+    //   5000
+    // );
+
+    // while (fadeImage != null) {await sleep(500);}
+    setTimeout(()=>{fin_animation();}, 2000)
+    
+
+    // Tu peux enchaîner ici une autre étape si tu veux
+    // await sleep(6000); // etc.
+  });
+}
+
+
+function showImageWithFade(img, x, y, width, height, duration = 5000) {
+  fadeImage = img;
+  fadeImageX = x;
+  fadeImageY = y;
+  fadeImageWidth = width;
+  fadeImageHeight = height;
+  fadeImageOpacity = 0;
+  fadePhase = 'in';
+
+  const fadeInSpeed = 0.01;
+  const fadeOutSpeed = 0.01;
+
+  const interval = setInterval(() => {
+    if (fadePhase === 'in') {
+      fadeImageOpacity += fadeInSpeed;
+      if (fadeImageOpacity >= 1) {
+        fadeImageOpacity = 1;
+        fadePhase = 'hold';
+
+        // après "duration" ms, passe à la phase de disparition
+        setTimeout(() => {
+          fadePhase = 'out';
+        }, duration);
+      }
+    } else if (fadePhase === 'out') {
+      fadeImageOpacity -= fadeOutSpeed;
+      if (fadeImageOpacity <= 0) {
+        fadeImageOpacity = 0;
+        fadeImage = null;
+        fadePhase = null;
+        clearInterval(interval);
+      }
+    }
+
+    draw(); // redraw la scène
+  }, 30);
+}
+
+
 
 function fin_animation(){
-  location.href("./pages/page.php")
+  window.location.replace("./pages/page.php")
 }
 
 
@@ -188,6 +331,10 @@ function draw() {
 
 
   if (showExclamation) {
+    narration = new Audio(assets_src+"texte-3.mp3");
+    narration.pause()
+    narration.currentTime=0;
+    narration.play();
     const padding = 20;
     const width = 200;
     const height = 60;
@@ -196,7 +343,7 @@ function draw() {
 
     // fond bulle semi-transparent, arrondi
     ctx.fillStyle = 'rgba(0,0,0,0.7)';
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = 'black';
     ctx.lineWidth = 3;
     roundRect(ctx, x, y, width, height, 15, true, true);
 
@@ -207,10 +354,29 @@ function draw() {
     ctx.fillText('!!!', canvas.width / 2, y + height / 1.6);
   }
 
+  if (isFadingOut) {
+    ctx.fillStyle = `rgba(0, 0, 0, ${fadeOpacity})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  if (fadeImage && fadePhase) {
+    console.log(fadeImage)
+    ctx.save();
+    ctx.globalAlpha = fadeImageOpacity;
+    ctx.drawImage(fadeImage, fadeImageX, fadeImageY, fadeImageWidth, fadeImageHeight);
+    ctx.restore();
+  }
+
+
+
 
 }
 
 function shakeVitrine(duration = 300, intensity = 10) {
+  impact.pause();
+  impact.currentTime = 0;
+  impact.play();
+
   if (isShaking) return; // évite de relancer si déjà en cours
 
   isShaking = true;
@@ -237,6 +403,10 @@ function shakeVitrine(duration = 300, intensity = 10) {
 }
 
 function startGlassBreakAnimation(vitrineX, vitrineY, vitrineWidth, vitrineHeight) {
+  impact.pause();
+  impact.currentTime = 0;
+  impact.play();
+
   glassShards = [];
 
   for (let i = 0; i < 5; i++) {
@@ -256,6 +426,12 @@ function startGlassBreakAnimation(vitrineX, vitrineY, vitrineWidth, vitrineHeigh
   }
 
   isBreaking = true;
+  impact = new Audio(assets_src+"impact_2.mp3");
+  impact.pause();
+  impact.currentTime = 0;
+  impact.play();
+
+  narration.pause();
   animateGlassBreak();
 }
 
@@ -275,7 +451,10 @@ function animateGlassBreak() {
       clearInterval(interval);
       isBreaking = false;
     }
+
+
   }, 30);
+
 }
 
 
