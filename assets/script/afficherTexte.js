@@ -19,6 +19,7 @@ function afficherTexte(texte, container) {
 
     setTimeout(()=>{
         const bouton = document.createElement("button");
+        bouton.id = "NextScene";
         bouton.textContent = "Avancer";
         bouton.classList.add("boutonSuite")
         container.appendChild(bouton);
@@ -39,6 +40,7 @@ function afficherTexte(texte, container) {
 
 export async function afficherTexteScene(scene, container) {
     container.style.display = "block";
+    document.body.style.cursor = "pointer";
     const audio = new Audio(scene["audio"]);
     afficherTexte(scene["texte"], container);
     audio.volume = 0.5;

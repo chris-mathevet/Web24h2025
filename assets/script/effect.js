@@ -4,8 +4,9 @@ const loading = document.getElementById('loading');
 
 import { afficherTexteScene } from './afficherTexte.js';
 import jsonreader from './jsonreader.js';
+const params = new URLSearchParams(window.location.search);
 
-let sceneIndex = 5
+let sceneIndex = params.get("scene")??0;
 
 // Variables pour l'effet
 let mouseX = 0;
@@ -32,13 +33,28 @@ let hoveredHaloIndex = null; // -1 ou null = rien en hover
 let scenesData = []
 scenesData = await jsonreader("../assets/data/data.json");
 
+const audioClickLigths = new Audio("../assets/audio/light-switch.mp3");
+const night = new Audio("../assets/audio/night-ambience.mp3");
+audioClickLigths.volume = 0.5;
+night.volume = 0.2;
+night.loop = true;
+document.getElementById("body").addEventListener("click", ()=>{
+    night.play();
+}
+)
+
 function changementScene(){
+    console.log(scenesData);
+
+
     document.getElementById("titre").textContent = scenesData[sceneIndex]["titre"]
     lumieresData = scenesData[sceneIndex]["interest"];
+
     loadImage();
     canvas.addEventListener('click', () => {
         if (hoveredHaloIndex !== null) {
             // Valider ce halo
+            audioClickLigths.play();
             const halo = lumieresData[hoveredHaloIndex];
             lumieresDataValide.push(halo);
             lumieresData.splice(hoveredHaloIndex, 1);
@@ -468,5 +484,27 @@ window.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
+const attendreBouton = setInterval(() => {
+    const bouton = document.getElementById("NextScene");
+    
+    if (bouton) {
+        if(sceneIndex==5){
+            bouton.remove();
+        }else{
 
+            console.log("bouton");
+            bouton.addEventListener("click", () => {
+                console.log("click btn");
+                console.log("sceneIndex:", sceneIndex, "type:", typeof sceneIndex);
+                let sceneIndex2 = parseInt(sceneIndex, 10);
+                
+                if (scenesData.hasOwnProperty(`${sceneIndex2 + 1}`)) {
+                    console.log(`${sceneIndex2 + 1}`);
+                    window.location.href = `?scene=${sceneIndex2 + 1}`;
+                }
+            });
+        }
 
+        clearInterval(attendreBouton); 
+    }
+}, 100);

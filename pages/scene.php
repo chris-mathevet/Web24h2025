@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="UTF-8">
-    <title>Effet Spotlight Canvas</title>
+    <title>Projet Lumière - JSremove 24H Info 2025</title>
     <meta name="viewport" content="width=1920px, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../assets/style/style.css"/>
 
@@ -52,8 +52,8 @@
         }
     </style>
 </head>
-<body>
-    <h1 id="titre">TEST</h1>
+<body id="body">
+    <h1 id="titre"></h1>
     <div id="text-container" style="display:none;"></div>
 
     <canvas id="canvas" width="1920" height="1080"></canvas>
