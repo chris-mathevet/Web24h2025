@@ -5,7 +5,7 @@ const loading = document.getElementById('loading');
 import { afficherTexteScene } from './afficherTexte.js';
 import jsonreader from './jsonreader.js';
 
-let sceneIndex = 3
+let sceneIndex = 5
 
 // Variables pour l'effet
 let mouseX = 0;

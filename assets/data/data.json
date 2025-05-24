@@ -155,26 +155,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 200,
-                "coY": 240,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 845.125,
+                "coY": 870,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -190,8 +172,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 115.125,
+                "coY": 651,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -199,8 +181,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
+                "coX": 1700.125,
+                "coY": 832,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -208,8 +190,17 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 289.125,
+                "coY": 850,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 1203.125,
+                "coY": 160,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
