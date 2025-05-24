@@ -446,7 +446,7 @@ function animate(timestamp) {
         }
     }
 
-    applyFishEyeEffect(ctx, canvas, 0.96);
+    // applyFishEyeEffect(ctx, canvas, 0.96);
 
     animationFrameId = requestAnimationFrame(animate);
 }
