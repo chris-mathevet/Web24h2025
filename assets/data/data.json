@@ -6,8 +6,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 602.125,
+                "coY": 407,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -15,8 +15,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
+                "coX": 1089.125,
+                "coY": 788,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -24,8 +24,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 202.125,
+                "coY": 600,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -41,8 +41,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 149.125,
+                "coY": 611,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -50,7 +50,7 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
+                "coX": 1322.125,
                 "coY": 240,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
@@ -59,8 +59,17 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 918.125,
+                "coY": 300,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 960.125,
+                "coY": 650,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -76,16 +85,7 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 200,
+                "coX": 680.125,
                 "coY": 240,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
@@ -94,8 +94,26 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 180.125,
+                "coY": 705,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 140.125,
+                "coY": 705,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 1100.125,
+                "coY": 755,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -111,8 +129,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 947.125,
+                "coY": 603,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -120,17 +138,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 1699.125,
+                "coY": 770,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -146,26 +155,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 200,
-                "coY": 240,
-                "colordebut": "#ff920080",
-                "colorHover": "#ff0000",
-                "colorfin": "#ffffff80",
-                "radiusX": 20,
-                "radiusY": 30
-            },
-            {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 845.125,
+                "coY": 870,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -181,8 +172,8 @@
         "audio": "/assets/audio/audio_test.m4a",
         "interest": [
             {
-                "coX": 150,
-                "coY": 200,
+                "coX": 115.125,
+                "coY": 651,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -190,8 +181,8 @@
                 "radiusY": 30
             },
             {
-                "coX": 200,
-                "coY": 240,
+                "coX": 1700.125,
+                "coY": 832,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
@@ -199,8 +190,17 @@
                 "radiusY": 30
             },
             {
-                "coX": 1900,
-                "coY": 1080,
+                "coX": 289.125,
+                "coY": 850,
+                "colordebut": "#ff920080",
+                "colorHover": "#ff0000",
+                "colorfin": "#ffffff80",
+                "radiusX": 20,
+                "radiusY": 30
+            },
+            {
+                "coX": 1203.125,
+                "coY": 160,
                 "colordebut": "#ff920080",
                 "colorHover": "#ff0000",
                 "colorfin": "#ffffff80",
