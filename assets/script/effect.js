@@ -46,7 +46,16 @@ document.getElementById("body").addEventListener("click", ()=>{
 }
 )
 
+console.log(sceneIndex)
+
 function changementScene(){
+    if(sceneIndex == 0){
+        const audioDebut = new Audio("../assets/audio/debut.m4a");
+        audioDebut.volume = 0.5;
+        document.getElementById("body").addEventListener("click",()=>{
+            audioDebut.play();
+        });
+    }
     console.log(scenesData);
 
 
