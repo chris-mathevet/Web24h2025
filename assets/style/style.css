@@ -1,0 +1,91 @@
+* {
+    font-family: "New Century Schoolbook, TeX Gyre Schola", serif;
+}
+
+#titre {
+    position: absolute;
+    text-align: center;
+    z-index: 1000000;
+    width: 100vw;
+    color: #fff;
+    font-weight: bold;
+    font-size: 3.5rem;
+    text-shadow:
+        0 0 5px #fffca1,
+        0 0 10px #fffca1,
+        0 0 20px #fffca1,
+        0 0 40px #ffeb3b,
+        0 0 80px #ffeb3b;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    z-index: 5;
+}
+
+#text-container {
+    font-size: 2.5rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+    padding: 1rem;
+    width: 65vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-shadow:
+        0 0 5px #fffca1,
+        0 0 10px #fffca1,
+        0 0 20px #fffca1,
+        0 0 40px #ffeb3b,
+        0 0 80px #ffeb3b;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    z-index: 1000000;
+}
+
+.letter {
+    opacity: 0;
+    display: inline;
+    transform: translateY(0.3em);
+    transition: all 0.3s ease;
+}
+
+.letter.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.boutonSuite {
+    margin: auto;
+    align-self: center;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #ffeb3b;
+    color: #333;
+    box-shadow:
+        0 0 8px #ffeb3b,
+        0 0 16px #ffeb3b;
+    transition: background-color 0.3s ease;
+}
+
+.boutonSuite:hover {
+    background-color: #fdd835;
+}

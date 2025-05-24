@@ -133,7 +133,6 @@ canvas.addEventListener('click', () => {
         }, 6000);
       }, 3000);
     }, 3000);
-    
   }
 });
 
@@ -245,7 +244,7 @@ function showImageWithFade(img, x, y, width, height, duration = 5000) {
 
 
 function fin_animation(){
-  window.location.replace("./pages/page.php")
+  window.location.href = "./pages/scene.php?scene=0";
 }
 
 
@@ -568,3 +567,17 @@ function roundRect(ctx, x, y, w, h, r, fill, stroke) {
     ctx.stroke();
   }
 }
+
+
+
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+        e.preventDefault();
+    }
+});
+
+window.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) {
+        e.preventDefault();
+    }
+}, { passive: false });
