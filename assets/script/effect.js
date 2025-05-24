@@ -34,6 +34,16 @@ let hoveredHaloIndex = null; // -1 ou null = rien en hover
 let scenesData = []
 scenesData = await jsonreader("../assets/data/data.json");
 
+const audioClickLigths = new Audio("../assets/audio/light-switch.mp3");
+const night = new Audio("../assets/audio/night-ambience.mp3");
+audioClickLigths.volume = 0.5;
+night.volume = 0.2;
+night.loop = true;
+document.getElementById("body").addEventListener("click", ()=>{
+    night.play();
+}
+)
+
 function changementScene(){
     console.log(scenesData);
 
@@ -45,6 +55,7 @@ function changementScene(){
     canvas.addEventListener('click', () => {
         if (hoveredHaloIndex !== null) {
             // Valider ce halo
+            audioClickLigths.play();
             const halo = lumieresData[hoveredHaloIndex];
             lumieresDataValide.push(halo);
             lumieresData.splice(hoveredHaloIndex, 1);
