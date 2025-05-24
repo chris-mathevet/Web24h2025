@@ -18,7 +18,6 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             background: #000;
-            cursor: none;
 
         }
 
@@ -60,5 +59,16 @@
     <canvas id="canvas" width="1920" height="1080"></canvas>
     <div class="loading" id="loading">Chargement de l'image...</div>
     <script type="module" src="../assets/script/effect.js"></script>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.addEventListener('click', function(event) {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        console.log(`Coordonnées du clic : x=${x}, y=${y}`);
+        });
+    </script>
 </body>
 </html>                                                               
