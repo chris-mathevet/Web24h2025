@@ -54,6 +54,7 @@
     </style>
 </head>
 <body>
+    <h1 id="titre">TEST</h1>
     <div id="text-container" style="display:none;"></div>
 
     <canvas id="canvas" width="1920" height="1080"></canvas>

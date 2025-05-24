@@ -1,5 +1,21 @@
-*{
+* {
     font-family: "New Century Schoolbook, TeX Gyre Schola", serif;
+}
+
+#titre {
+    position: absolute;
+    text-align: center;
+    z-index: 1000000;
+    width: 100vw;
+    color: #fff;
+    font-weight: bold;
+    font-size: 3.5rem;
+    text-shadow:
+        0 0 5px #fffca1,
+        0 0 10px #fffca1,
+        0 0 20px #fffca1,
+        0 0 40px #ffeb3b,
+        0 0 80px #ffeb3b;
 }
 
 .loading {

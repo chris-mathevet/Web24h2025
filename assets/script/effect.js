@@ -35,6 +35,7 @@ let scenesData = []
 scenesData = await jsonreader("../assets/data/data.json");
 
 function changementScene(){
+    document.getElementById("titre").textContent = scenesData[sceneIndex]["titre"]
     lumieresData = scenesData[sceneIndex]["interest"];
     loadImage();
     canvas.addEventListener('click', () => {
